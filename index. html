@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blaq Skin Tattoos</title>
+
+<style>
+body { margin:0; font-family:Arial; background:#0d0d0d; color:white; }
+header { text-align:center; padding:15px; font-size:24px; background:black; }
+nav { display:flex; justify-content:center; gap:15px; background:#111; padding:10px; }
+nav a { color:white; text-decoration:none; }
+.hero { text-align:center; padding:60px; background:#222; }
+.btn { background:#25D366; padding:10px; text-decoration:none; color:white; border-radius:5px; }
+.section { padding:40px 20px; }
+form { display:flex; flex-direction:column; gap:10px; max-width:400px; }
+input, textarea { padding:10px; border-radius:5px; border:none; }
+button { padding:10px; background:#25D366; border:none; color:white; }
+</style>
+</head>
+
+<body>
+
+<header>Blaq Skin Tattoos</header>
+
+<nav>
+<a href="#booking">Book</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<section class="hero">
+<h1>Professional Tattoos</h1>
+<p>Johannesburg</p>
+</section>
+
+<section class="section" id="booking">
+<h2>Book Appointment</h2>
+
+<form onsubmit="sendBooking(event)">
+<input type="text" id="name" placeholder="Your Name" required>
+<input type="date" id="date" required>
+<textarea id="details" placeholder="Tattoo details"></textarea>
+<button type="submit">Book</button>
+</form>
+
+</section>
+
+<section class="section" id="contact">
+<h2>Contact</h2>
+<p>Phone: 067 881 7734</p>
+</section>
+
+<script>
+async function sendBooking(e) {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const date = document.getElementById("date").value;
+    const details = document.getElementById("details").value;
+
+    const res = await fetch("https://YOUR-RENDER-URL.onrender.com/book", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, date, details })
+    });
+
+    const data = await res.json();
+    alert(data.message);
+}
+</script>
+
+</body>
+</html>
